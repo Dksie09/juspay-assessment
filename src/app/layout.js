@@ -1,5 +1,6 @@
 import { ThemeProvider } from "next-themes"
 import { Inter } from "next/font/google";
+import Shell from "@/components/layout/Shell";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
         className={`${inter.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+        <Shell>{children}</Shell>
         </ThemeProvider>
       </body>
     </html>

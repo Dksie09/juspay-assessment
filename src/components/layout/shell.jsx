@@ -1,9 +1,18 @@
 import React from 'react'
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/layout/app-sidebar"
 
-function shell() {
+function Shell({ children }) {
   return (
-    <div>shell</div>
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
+   
   )
 }
 
-export default shell
+export default Shell
