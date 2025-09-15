@@ -10,7 +10,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Input } from "@/components/ui/input";
 import { SearchInput } from "@/components/ui/searchInput";
 import IconButton from "@/components/ui/iconbutton";
 
@@ -73,15 +72,13 @@ const Topbar = ({
       </div>
 
       <div className="flex items-start gap-5">
-        <div>
-          <SearchInput
-            value={searchValue}
-            onChange={onSearchChange || (() => console.log("Search changed"))}
-            placeholder={searchPlaceholder}
-            shortcut="⌘/"
-            className="max-w-md w-[160px]"
-          />
-        </div>
+        <SearchInput
+          value={searchValue}
+          onChange={onSearchChange || (() => {})}
+          placeholder={searchPlaceholder}
+          shortcut="⌘/"
+          className="max-w-md w-[160px]"
+        />
 
         <div className="flex items-center gap-2">
           {rightIcons.map((icon) => (

@@ -23,16 +23,15 @@ function Shell({ children }) {
 
   return (
     <div className="flex min-h-screen w-full">
-      {/* Left Sidebar */}
       <div
         className={`transition-all duration-200 ease-linear ${
           leftOpen ? `w-[${LEFT_SIDEBAR_WIDTH}]` : "w-0"
         } overflow-hidden`}
       >
         <SidebarProvider
-          defaultOpen={leftOpen} // ✅ Use actual state
-          open={leftOpen} // ✅ Use actual state
-          onOpenChange={setLeftOpen} // ✅ Pass actual setter
+          defaultOpen={leftOpen}
+          open={leftOpen}
+          onOpenChange={setLeftOpen}
           width={LEFT_SIDEBAR_WIDTH}
         >
           <div style={{ width: LEFT_SIDEBAR_WIDTH }}>
@@ -41,25 +40,25 @@ function Shell({ children }) {
         </SidebarProvider>
       </div>
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0">
-        <Topbar
-          onToggleClick={handleLeftToggle}
-          onIconClick={handleIconClick}
-        />
+        <div className="sticky top-0 z-50 bg-background">
+          <Topbar
+            onToggleClick={handleLeftToggle}
+            onIconClick={handleIconClick}
+          />
+        </div>
         <div className="flex-1 p-4">{children}</div>
       </main>
 
-      {/* Right Sidebar */}
       <div
         className={`transition-all duration-200 ease-linear ${
           rightOpen ? `w-[${RIGHT_SIDEBAR_WIDTH}]` : "w-0"
         } overflow-hidden`}
       >
         <SidebarProvider
-          defaultOpen={rightOpen} // ✅ Use actual state
-          open={rightOpen} // ✅ Use actual state
-          onOpenChange={setRightOpen} // ✅ Pass actual setter
+          defaultOpen={rightOpen}
+          open={rightOpen}
+          onOpenChange={setRightOpen}
           width={RIGHT_SIDEBAR_WIDTH}
         >
           <div style={{ width: RIGHT_SIDEBAR_WIDTH }}>
