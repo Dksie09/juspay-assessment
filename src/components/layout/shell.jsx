@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebarLeft } from "@/components/layout/AppSidebarLeft";
 import { AppSidebarRight } from "@/components/layout/AppSidebarRight";
-import Icon from "../ui/icon";
+import Topbar from "@/components/layout/Topbar";
 
 const LEFT_SIDEBAR_WIDTH = "212px";
 const RIGHT_SIDEBAR_WIDTH = "280px";
@@ -12,18 +12,27 @@ function Shell({ children }) {
   const [leftOpen, setLeftOpen] = useState(true);
   const [rightOpen, setRightOpen] = useState(true);
 
+  const handleLeftToggle = () => setLeftOpen(!leftOpen);
+  const handleRightToggle = () => setRightOpen(!rightOpen);
+
+  const handleIconClick = (iconName) => {
+    if (iconName === "SidePanel") {
+      handleRightToggle();
+    }
+  };
+
   return (
     <div className="flex min-h-screen w-full">
-      {/* Left Sidebar with custom width */}
+      {/* Left Sidebar */}
       <div
         className={`transition-all duration-200 ease-linear ${
           leftOpen ? `w-[${LEFT_SIDEBAR_WIDTH}]` : "w-0"
         } overflow-hidden`}
       >
         <SidebarProvider
-          defaultOpen={true}
-          open={true}
-          onOpenChange={() => {}}
+          defaultOpen={leftOpen} // ✅ Use actual state
+          open={leftOpen} // ✅ Use actual state
+          onOpenChange={setLeftOpen} // ✅ Pass actual setter
           width={LEFT_SIDEBAR_WIDTH}
         >
           <div style={{ width: LEFT_SIDEBAR_WIDTH }}>
@@ -34,29 +43,23 @@ function Shell({ children }) {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0">
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <button onClick={() => setLeftOpen(!leftOpen)}>
-            <Icon name="SidePanel" />
-          </button>
-          <div className="flex-1 text-center">Your App</div>
-          <button onClick={() => setRightOpen(!rightOpen)}>
-            {" "}
-            <Icon name="SidePanel" />
-          </button>
-        </header>
+        <Topbar
+          onToggleClick={handleLeftToggle}
+          onIconClick={handleIconClick}
+        />
         <div className="flex-1 p-4">{children}</div>
       </main>
 
-      {/* Right Sidebar with different width */}
+      {/* Right Sidebar */}
       <div
         className={`transition-all duration-200 ease-linear ${
           rightOpen ? `w-[${RIGHT_SIDEBAR_WIDTH}]` : "w-0"
         } overflow-hidden`}
       >
         <SidebarProvider
-          defaultOpen={true}
-          open={true}
-          onOpenChange={() => {}}
+          defaultOpen={rightOpen} // ✅ Use actual state
+          open={rightOpen} // ✅ Use actual state
+          onOpenChange={setRightOpen} // ✅ Pass actual setter
           width={RIGHT_SIDEBAR_WIDTH}
         >
           <div style={{ width: RIGHT_SIDEBAR_WIDTH }}>

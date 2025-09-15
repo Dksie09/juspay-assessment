@@ -214,10 +214,10 @@ export function AppSidebarLeft({
       </SidebarHeader>
 
       <SidebarContent className="flex flex-col gap-4 py-4">
-        <SidebarGroup classname="pb-3">
+        <SidebarGroup className="pb-3">
           <SidebarGroupLabel className="flex justify-between">
             <button className="text-foreground-muted px-2">Fɑvourites</button>
-            <button className="text-foreground-muted-disabled px-2">
+            <button className="text-foreground-muted-disabled px-2 text-right">
               Recently
             </button>
           </SidebarGroupLabel>
@@ -228,7 +228,7 @@ export function AppSidebarLeft({
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup classname="pb-3">
+        <SidebarGroup className="pb-3">
           <SidebarGroupLabel className="ml-1">Dɑshboɑrds</SidebarGroupLabel>
           <SidebarGroupContent className="ml-1">
             <SidebarMenu>
@@ -239,7 +239,7 @@ export function AppSidebarLeft({
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup classname="pb-3">
+        <SidebarGroup className="pb-3">
           <SidebarGroupLabel className="ml-1">Pages</SidebarGroupLabel>
           <SidebarGroupContent className="ml-1">
             <SidebarMenu>

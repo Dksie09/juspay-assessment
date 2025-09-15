@@ -1,13 +1,13 @@
-import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import ThemeToggle from "@/components/ThemeToggle";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 export default function Home() {
   return (
     <div className="min-h-screen w-full">
-      
-     
-      <ThemeToggle />
+      {/* eCommerce dashboard */}
+      <main className="p-3 h-screen ">
+        <h1 className="py-2 px-1 font-semibold text-sm text-foreground">eCommerce</h1>
+          <Dashboard/>
+      </main>
     </div>
   );
 }
