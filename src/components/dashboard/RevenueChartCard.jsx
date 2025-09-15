@@ -18,7 +18,7 @@ const chartConfig = {
 
 function RevenueChartCard() {
   return (
-    <Card className="h-[318px]">
+    <Card className="h-[318px] w-full">
       <div className="flex gap-4 items-center">
         <CardHeading>Revenue</CardHeading>
         <Separator orientation="vertical" />

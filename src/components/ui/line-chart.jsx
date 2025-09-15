@@ -102,7 +102,7 @@ export default function ChartLine() {
           stroke={chartConfig.current.color}
           strokeWidth={3}
           dot={false}
-          strokeDasharray="100 0 100 0 100 0 100 0 100 0 100 0 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4"
+          strokeDasharray="100 0 100 0 100 0 100 0 100 0  8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4"
         />
       </ComposedChart>
     </ChartContainer>

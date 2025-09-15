@@ -11,6 +11,7 @@
   --color-card-primary: var(--card-primary);
   --color-card-secondary: var(--card-secondary);
   --color-card-accent: var(--card-accent);
+  --color-marker: var(--marker);
   --color-input: var(--input);
 --color-selectbar: var(--selectbar);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -73,6 +74,8 @@ body {
   --chart-3: #A8C5DA;
   --chart-4: #1C1C1C;
 
+  --marker: #1C1C1C;
+
 /* ------------------------------------------------------------ */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -118,6 +121,8 @@ body {
   --chart-2: #687681;
   --chart-3: #A8C5DA;
   --chart-4: #C6C7F8;
+
+  --marker: #C6C7F8;
 
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);

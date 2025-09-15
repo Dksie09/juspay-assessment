@@ -2,6 +2,8 @@ import React from "react";
 import StatCards from "@/components/Dashboard/StatCards";
 import BarChartCard from "@/components/dashboard/BarChartCard";
 import RevenueChartCard from "@/components/dashboard/RevenueChartCard";
+import LocationCard from "@/components/dashboard/LocationCard";
+LocationCard;
 
 function Dashboard() {
   return (
@@ -10,9 +12,9 @@ function Dashboard() {
         <StatCards />
         <BarChartCard />
       </div>
-      <div className="grid grid-cols-[3fr_1fr] gap-7 h-[318px]">
+      <div className="flex gap-7 h-[318px]">
         <RevenueChartCard />
-        <div className="bg-gray-300">div2</div>
+        <LocationCard />
       </div>
     </div>
   );
