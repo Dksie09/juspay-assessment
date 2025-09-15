@@ -58,7 +58,7 @@ function LocationCard({
   const displayMarkers = mapMarkers.length > 0 ? mapMarkers : defaultMarkers;
 
   return (
-    <Card className={`min-w-[202px] ${className}`}>
+    <Card className={`min-w-[202px] max-w-[202px] h-full ${className}`}>
       <CardHeading>{title}</CardHeading>
       <CardContent className="flex flex-col gap-4">
         <WorldMap markers={displayMarkers} />

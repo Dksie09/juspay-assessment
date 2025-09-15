@@ -46,7 +46,7 @@ const data = [
 
 function SalesTableCard() {
   return (
-    <Card className="w-full">
+    <Card className="w-full h-full">
       <CardHeading>Top Selling Products</CardHeading>
       <CardContent>
         <SalesTable data={data} />

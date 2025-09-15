@@ -20,7 +20,7 @@ const StatCard = ({
 
   return (
     <div
-      className={`flex min-w-[200px] w-full p-6 flex-col items-start gap-2 flex-1 rounded-2xl shadow ${cardBg} ${className}`}
+      className={`flex min-w-[200px] max-w-[400px] w-full p-6 flex-col items-start gap-2 flex-1 rounded-2xl shadow ${cardBg} ${className}`}
     >
       <h3 className=" text-sm font-semibold">{title}</h3>
 
