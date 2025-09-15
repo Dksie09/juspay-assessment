@@ -2,7 +2,9 @@ import React from "react";
 
 function Card({ children, className = "" }) {
   return (
-    <div className={`p-6 bg-card-primary gap-4 rounded-2xl ${className}`}>
+    <div
+      className={`p-6 bg-card-primary flex flex-col gap-4 rounded-2xl ${className}`}
+    >
       {children}
     </div>
   );

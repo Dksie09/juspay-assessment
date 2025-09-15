@@ -3,7 +3,7 @@ import StatCard from "@/components/ui/StatCard";
 
 function StatCards() {
   return (
-    <div className="grid grid-cols-2 gap-7">
+    <div className="grid grid-cols-2 gap-7 w-full">
       <StatCard
         title="Customers"
         value="3,781"
