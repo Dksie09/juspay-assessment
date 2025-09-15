@@ -1,6 +1,6 @@
 import { ThemeProvider } from "next-themes"
 import { Inter } from "next/font/google";
-import Shell from "@/components/layout/Shell";
+import Shell from "@/components/layout/shell";
 import "./globals.css";
 
 const inter = Inter({

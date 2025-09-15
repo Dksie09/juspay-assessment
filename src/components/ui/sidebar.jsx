@@ -49,13 +49,14 @@ function SidebarProvider({
   className,
   style,
   children,
+  width = SIDEBAR_WIDTH, // NEW: Accept width prop
+  widthMobile = SIDEBAR_WIDTH_MOBILE, // NEW: Accept mobile width prop
+  widthIcon = SIDEBAR_WIDTH_ICON, // NEW: Accept icon width prop
   ...props
 }) {
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = React.useState(false);
 
-  // This is the internal state of the sidebar.
-  // We use openProp and setOpenProp for control from outside the component.
   const [_open, _setOpen] = React.useState(defaultOpen);
   const open = openProp ?? _open;
   const setOpen = React.useCallback(
@@ -67,18 +68,15 @@ function SidebarProvider({
         _setOpen(openState);
       }
 
-      // This sets the cookie to keep the sidebar state.
       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
     [setOpenProp, open]
   );
 
-  // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
   }, [isMobile, setOpen, setOpenMobile]);
 
-  // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
     const handleKeyDown = (event) => {
       if (
@@ -94,8 +92,6 @@ function SidebarProvider({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [toggleSidebar]);
 
-  // We add a state so that we can do data-state="expanded" or "collapsed".
-  // This makes it easier to style the sidebar with Tailwind classes.
   const state = open ? "expanded" : "collapsed";
 
   const contextValue = React.useMemo(
@@ -107,8 +103,22 @@ function SidebarProvider({
       openMobile,
       setOpenMobile,
       toggleSidebar,
+      width, // NEW: Add width to context
+      widthMobile, // NEW: Add mobile width to context
+      widthIcon, // NEW: Add icon width to context
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+    [
+      state,
+      open,
+      setOpen,
+      isMobile,
+      openMobile,
+      setOpenMobile,
+      toggleSidebar,
+      width,
+      widthMobile,
+      widthIcon,
+    ]
   );
 
   return (
@@ -117,8 +127,8 @@ function SidebarProvider({
         <div
           data-slot="sidebar-wrapper"
           style={{
-            "--sidebar-width": SIDEBAR_WIDTH,
-            "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
+            "--sidebar-width": width, // NEW: Use dynamic width
+            "--sidebar-width-icon": widthIcon, // NEW: Use dynamic icon width
             ...style,
           }}
           className={cn(
@@ -142,14 +152,15 @@ function Sidebar({
   children,
   ...props
 }) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+  const { isMobile, state, openMobile, setOpenMobile, width, widthMobile } =
+    useSidebar();
 
   if (collapsible === "none") {
     return (
       <div
         data-slot="sidebar"
         className={cn(
-          "bg-sidebar text-sidebar-foreground flex h-full min-w-(--sidebar-width) flex-col",
+          "bg-sidebar text-sidebar-foreground flex h-full min-w-(--sidebar-width) flex-col ",
           className
         )}
         {...props}
@@ -168,7 +179,7 @@ function Sidebar({
           data-mobile="true"
           className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
           style={{
-            "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+            "--sidebar-width": widthMobile, // NEW: Use dynamic mobile width
           }}
           side={side}
         >
@@ -191,7 +202,6 @@ function Sidebar({
       data-side={side}
       data-slot="sidebar"
     >
-      {/* This is what handles the sidebar gap on desktop */}
       <div
         data-slot="sidebar-gap"
         className={cn(
@@ -210,7 +220,6 @@ function Sidebar({
           side === "left"
             ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
             : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
-          // Adjust the padding for floating and inset variants.
           variant === "floating" || variant === "inset"
             ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
@@ -354,10 +363,7 @@ function SidebarGroup({ className, ...props }) {
     <div
       data-slot="sidebar-group"
       data-sidebar="group"
-      className={cn(
-        "relative flex w-full min-w-0 flex-col pb-3 gap-1",
-        className
-      )}
+      className={cn("relative flex w-full min-w-0 flex-col gap-1", className)}
       {...props}
     />
   );
