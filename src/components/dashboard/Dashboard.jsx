@@ -37,7 +37,9 @@ const Dashboard = React.memo(function Dashboard(props = {}) {
         <div className="flex items-center justify-center h-64">
           <div className="flex flex-col items-center gap-3">
             <LoadingSpinner size="lg" />
-            <p className="text-sm text-muted-foreground">Loading dashboard...</p>
+            <p className="text-sm text-muted-foreground">
+              Loading dashboard...
+            </p>
           </div>
         </div>
       </div>
@@ -55,11 +57,7 @@ const Dashboard = React.memo(function Dashboard(props = {}) {
         <div className={shouldStack ? "w-full" : "flex-1"}>
           <StatCards />
         </div>
-        <div
-          className={`${
-            shouldStack ? "w-full" : "max-w-[540px] w-full"
-          } h-[252px]`}
-        >
+        <div className={shouldStack ? "w-full" : "flex-1 h-[252px]"}>
           <BarChartCard />
         </div>
       </div>
