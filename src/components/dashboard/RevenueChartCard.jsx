@@ -16,7 +16,7 @@ const chartConfig = {
   },
 };
 
-const RevenueChartCard = React.memo(function RevenueChartCard() {
+const RevenueChartCard = function RevenueChartCard() {
   return (
     <Card className="h-[318px] w-full">
       <div className="flex flex-col lg:flex-row lg:gap-4 lg:items-center gap-2">
@@ -46,11 +46,11 @@ const RevenueChartCard = React.memo(function RevenueChartCard() {
         </div>
       </div>
       <CardContent className="h-[232px]">
-        <ChartLine />
+        <ChartLine key={Date.now()} />
       </CardContent>
     </Card>
   );
-});
+};
 
 export default RevenueChartCard;
 

@@ -95,6 +95,9 @@ export default function ChartLine() {
           fillOpacity={0.2}
           stroke={chartConfig.previous.color}
           strokeWidth={3}
+          animationBegin={0}
+          animationDuration={2000}
+          animationEasing="ease-in-out"
         />
         <Line
           dataKey="current"
@@ -102,7 +105,10 @@ export default function ChartLine() {
           stroke={chartConfig.current.color}
           strokeWidth={3}
           dot={false}
-          strokeDasharray="100 0 100 0 100 0 100 0 100 0  8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4"
+          strokeDasharray="100 0 100 0 100 0 100 0 100 0  8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4 8 4"
+          animationBegin={500}
+          animationDuration={2000}
+          animationEasing="ease-in-out"
         />
       </ComposedChart>
     </ChartContainer>

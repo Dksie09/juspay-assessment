@@ -2,6 +2,7 @@ import React from "react";
 import Card, { CardContent, CardHeading } from "../ui/card";
 import Progressbar from "../ui/progressbar";
 import Marker from "../ui/marker";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 
 function LocationItem({ name, value, progress }) {
   return (
@@ -24,10 +25,19 @@ function WorldMap({ markers = [], className = "" }) {
         className="w-full  h-[82px] object-cover"
       />
       {markers.map((marker, index) => (
-        <Marker
-          key={`marker-${index}`}
-          className={`absolute ${marker.position}`}
-        />
+        <Tooltip key={`marker-${index}`}>
+          <TooltipTrigger asChild>
+            <div
+              className={`absolute ${marker.position}`}
+              aria-label={marker.name}
+            >
+              <Marker />
+            </div>
+          </TooltipTrigger>
+          {marker.name ? (
+            <TooltipContent side="top">{marker.name}</TooltipContent>
+          ) : null}
+        </Tooltip>
       ))}
     </div>
   );
@@ -47,10 +57,10 @@ function LocationCard({
   ];
 
   const defaultMarkers = [
-    { position: "top-[27px] left-[16px]" },
-    { position: "top-[31px] left-[35px]" },
-    { position: "bottom-[26px] right-[45px]" },
-    { position: "bottom-[16px] right-[32px]" },
+    { position: "top-[27px] left-[16px]", name: "San Francisco" },
+    { position: "top-[31px] left-[35px]", name: "New York" },
+    { position: "bottom-[26px] right-[45px]", name: "Singapore" },
+    { position: "bottom-[16px] right-[32px]", name: "Sydney" },
   ];
 
   const displayLocations = locations.length > 0 ? locations : defaultLocations;

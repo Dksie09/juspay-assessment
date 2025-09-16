@@ -125,7 +125,7 @@ const Topbar = ({
         </div>
 
         {/* Mobile view - show toggle sidebar and dropdown menu */}
-        <div className="flex max-[1140px]:flex items-center gap-2">
+        <div className="hidden max-[1140px]:flex items-center gap-2">
           {/* RIGHT sidebar toggle - uses handleIconClick (same as desktop) */}
           <IconButton
             iconName="SidePanel"

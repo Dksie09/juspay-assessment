@@ -8,7 +8,6 @@ import LocationCard from "@/components/dashboard/LocationCard";
 import SalesTableCard from "@/components/dashboard/SalesTableCard";
 import RadialSalesCard from "@/components/dashboard/RadialSalesCard";
 import { useLayout } from "@/hooks/use-layout";
-import LoadingSpinner from "@/components/ui/loading-spinner";
 
 const DashboardProps = z
   .object({
@@ -21,30 +20,8 @@ const Dashboard = React.memo(function Dashboard(props = {}) {
   DashboardProps.parse(props);
 
   const { isCompact, availableWidth } = useLayout();
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  // Simulate loading for dashboard data
-  React.useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 800);
-    return () => clearTimeout(timer);
-  }, []);
 
   const shouldStack = isCompact || availableWidth < 900;
-
-  if (isLoading) {
-    return (
-      <div className="py-4 flex flex-col gap-4 lg:gap-7">
-        <div className="flex items-center justify-center h-64">
-          <div className="flex flex-col items-center gap-3">
-            <LoadingSpinner size="lg" />
-            <p className="text-sm text-muted-foreground">
-              Loading dashboard...
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="pt-4 flex flex-col gap-4 lg:gap-7">
