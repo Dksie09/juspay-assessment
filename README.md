@@ -1,40 +1,46 @@
 ## Dashboard
 
-A fast, modern, and accessible analytics dashboard built with Next.js and tailwind
+A fast, modern, and accessible analytics dashboard built with Next.js and Tailwind CSS.
 
-- eCommerce dashboard: [juspay-khaki.vercel.app](https://juspay-khaki.vercel.app/)
-- Orders list: [juspay-khaki.vercel.app/orders](https://juspay-khaki.vercel.app/orders)
+- Live: [eCommerce dashboard](https://juspay-khaki.vercel.app/)
+- Live: [Orders list](https://juspay-khaki.vercel.app/orders)
 
 ### Demo
 
 
-
-https://github.com/user-attachments/assets/60a990b0-01b1-430f-9a4c-4d27e91b4ce9
-
+https://github.com/user-attachments/assets/d7554069-c5e0-43b6-90cf-692fa5659882
 
 
+### Features
+
+- Filtering, searching, sorting (ID), and pagination
+- Dark and light theme with system preference
+- Responsive layout (desktop, tablet, mobile)
+- Keyboard navigation for tables and shell areas
+- Accessible tooltips and focus styles
+- Charts with subtle motion
 
 ### File Structure Overview
 
 ```
 src/
   app/
-    globals.css          # defining theme variables
-    layout.js            # Root layout (theme providers, shell)
+    globals.css          # Theme variables and base styles
+    layout.js            # Root layout (theme provider, shell)
     page.js              # Dashboard landing page
-    orders/page.jsx      # Orders list page 
+    orders/page.jsx      # Orders list page
   components/
-    dashboard/           # Dashboard-focused cards and charts
+    dashboard/           # Dashboard cards and charts
       Dashboard.jsx
       ...
-    layout/              # Shell: responsive sidebars, topbar
+    layout/              # App shell: sidebars, topbar
       Shell.jsx
       ...
     orders/              # Orders table and related UI
       Orders.jsx
       OrderTable.jsx      # Main table (filter, sort, paginate, keyboard nav)
       ...
-    ui/                  # Reusable UI elements
+    ui/                  # Reusable UI primitives
       avatar.jsx
       bar-chart.jsx
       breadcrumb.jsx
@@ -54,56 +60,66 @@ public/
   images/                 # Misc images
 ```
 
-### Getting Started (Local Setup)
+### Getting Started
 
-- **Clone repository**
+#### Requirements
+
+- Node.js 18+ (recommended LTS)
+- npm 9+ (or pnpm/yarn)
+
+#### Setup
 
 ```bash
 git clone https://github.com/Dksie09/juspay-assessment.git
-```
-
-- **Install dependencies**
-
-```bash
+cd juspay-assessment
 npm install
-```
-
-- **Run the app in development**
-
-```bash
 npm run dev
+# open http://localhost:3000
 ```
-go to http://localhost:3000
 
-- **Build for production**
+#### Production build
 
 ```bash
 npm run build
+npm start
 ```
+
+### Scripts
+
+- `npm run dev`: Start dev server
+- `npm run build`: Build for production
+- `npm start`: Start production server
+- `npm run lint`: Run ESLint
 
 ### Tech Stack
 
 - Next.js 15
 - Tailwind CSS v4
-- Shadcn
+- shadcn/ui + with cusomtizations
 - lucide-react
 - next-themes
-- @tanstack/react-table
 - recharts
 - zod
 
-### Design Thoughts
-Honeslty, it's more about what feels right but a few thoughts/ features:
-- Keep it simple on dashboards, delays in animations feels annoying/ slow
-- subtle scale down effect when pressing a button so it feels more "alive"
-- keyboard shortcut + navigation for accessibility
+### Accessibility & UX
+
+- Keyboard shortcuts:
   - Cmd/Ctrl + /: focus search
   - Arrow Up/Down: move within focused region (sidebar or table)
   - Enter/Space: activate table row
-- Tooltips: initial delay + skip-delay for fast hover switch
-- properly define all theme specific variables in globals.css
-- graph animation
+- Focus-visible rings, ARIA roles for interactive elements
+- Tooltips with initial delay and skip delay for rapid hover changes
+- Motion tuned to be fast and subtle (really important for dashboards)
 
-https://github.com/user-attachments/assets/e4f197f6-d791-436e-a08a-a9876cb92fa2
+### Design Notes
 
-Struggled with: The Donut chart with custom edges of arcs :)
+- Keep dashboard interactions snappy—avoid long delays on animations
+- Subtle press feedback (scale-down on buttons) to improve perceived responsiveness
+- Theme tokens defined in `globals.css` for consistent colors/spacing
+
+### Known Challenges
+
+- Donut chart with custom arc edges gave me a hard time
+
+## License
+MIT
