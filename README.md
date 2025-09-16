@@ -121,5 +121,5 @@ npm start
 
 - Donut chart with custom arc edges gave me a hard time
 
-## License
-MIT
+
+License - MIT
