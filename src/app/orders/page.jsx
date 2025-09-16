@@ -1,3 +1,4 @@
+import Orders from "@/components/orders/Orders";
 import React from "react";
 
 function page() {
@@ -8,6 +9,7 @@ function page() {
         <h1 className="py-2 px-1 font-semibold text-sm text-foreground">
           Order List
         </h1>
+        <Orders />
       </main>
     </div>
   );

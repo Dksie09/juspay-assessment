@@ -20,13 +20,22 @@ function Table({ className, ...props }) {
 
 function TableHeader({ className, ...props }) {
   return (
-    <thead data-slot="table-header" className={cn("", className)} {...props} />
+    <thead
+      data-slot="table-header"
+      className={cn("border-b border-input", className)}
+      {...props}
+    />
   );
 }
 
-function TableBody({ className, ...props }) {
+function TableBody({ className, separator = false, ...props }) {
   return (
-    <tbody data-slot="table-body" className={cn("", className)} {...props} />
+    <tbody
+      data-slot="table-body"
+      className={cn("", className)}
+      data-separator={separator}
+      {...props}
+    />
   );
 }
 
@@ -41,10 +50,17 @@ function TableFooter({ className, ...props }) {
 }
 
 function TableRow({ className, ...props }) {
+  const parentElement = React.useContext(TableContext);
+  const isBodyRow = parentElement?.separator;
+
   return (
     <tr
       data-slot="table-row"
-      className={cn("transition-colors", className)}
+      className={cn(
+        "transition-colors",
+        isBodyRow && "border-b border-input",
+        className
+      )}
       {...props}
     />
   );
@@ -100,6 +116,27 @@ function TableHeaderSeparator({ className, ...props }) {
     </tr>
   );
 }
+
+// Context to pass separator info to TableRow
+const TableContext = React.createContext();
+
+// Updated TableBody with context provider
+function TableBodyWithContext({
+  className,
+  separator = false,
+  children,
+  ...props
+}) {
+  return (
+    <TableContext.Provider value={{ separator }}>
+      <tbody data-slot="table-body" className={cn("", className)} {...props}>
+        {children}
+      </tbody>
+    </TableContext.Provider>
+  );
+}
+
+TableBody = TableBodyWithContext;
 
 export {
   Table,

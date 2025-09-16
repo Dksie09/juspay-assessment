@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebarLeft } from "@/components/layout/AppSidebarLeft";
 import { AppSidebarRight } from "@/components/layout/AppSidebarRight";
@@ -18,6 +18,15 @@ function Shell({ children }) {
   const [rightOpen, setRightOpen] = useState(true);
   const [leftSheetOpen, setLeftSheetOpen] = useState(false);
   const [rightSheetOpen, setRightSheetOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
+  // Auto-close mobile sheets when transitioning to desktop
+  useEffect(() => {
+    if (!isMobile) {
+      setLeftSheetOpen(false);
+      setRightSheetOpen(false);
+    }
+  }, [isMobile]);
 
   const handleLeftToggle = () => {
     if (isMobile) {
@@ -39,6 +48,10 @@ function Shell({ children }) {
     if (iconName === "SidePanel") {
       handleRightToggle();
     }
+  };
+
+  const handleSearchChange = (value) => {
+    setSearchValue(value);
   };
 
   return (
@@ -77,6 +90,8 @@ function Shell({ children }) {
               onToggleClick={handleLeftToggle}
               onIconClick={handleIconClick}
               isMobile={isMobile}
+              searchValue={searchValue}
+              onSearchChange={handleSearchChange}
             />
           </div>
           <div className="flex-1 p-4">{children}</div>

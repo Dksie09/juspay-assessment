@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import React from "react";
 import { Menu } from "lucide-react";
 import {
   Breadcrumb,
@@ -20,20 +21,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-const RIGHT_ICONS = [
-  { name: "Theme", ariaLabel: "Toggle theme" },
-  { name: "Clock", ariaLabel: "View time" },
-  { name: "Bell", ariaLabel: "View notifications" },
-  { name: "SidePanel", ariaLabel: "Toggle sidebar" },
-];
+import { TOPBAR_DATA } from "@/lib/constants";
 
 const Topbar = ({
-  rightIcons = RIGHT_ICONS,
+  rightIcons = TOPBAR_DATA.rightIcons,
   onToggleClick,
   onStarClick,
   onIconClick,
-  searchPlaceholder = "Search...",
+  searchPlaceholder = TOPBAR_DATA.search.placeholder,
   onSearchChange,
   searchValue = "",
   isMobile = false,
@@ -53,6 +48,10 @@ const Topbar = ({
 
   const handleMenuItemClick = (iconName) => {
     handleIconClick(iconName);
+  };
+
+  const handleSearchChange = (e) => {
+    onSearchChange?.(e.target.value);
   };
 
   return (
@@ -78,13 +77,22 @@ const Topbar = ({
         <div className="ml-2">
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="#">Dashboards</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Default</BreadcrumbPage>
-              </BreadcrumbItem>
+              {TOPBAR_DATA.breadcrumb.items.map((item, index) => (
+                <React.Fragment key={index}>
+                  <BreadcrumbItem>
+                    {item.type === "link" ? (
+                      <BreadcrumbLink href={item.href}>
+                        {item.name}
+                      </BreadcrumbLink>
+                    ) : (
+                      <BreadcrumbPage>{item.name}</BreadcrumbPage>
+                    )}
+                  </BreadcrumbItem>
+                  {index < TOPBAR_DATA.breadcrumb.items.length - 1 && (
+                    <BreadcrumbSeparator />
+                  )}
+                </React.Fragment>
+              ))}
             </BreadcrumbList>
           </Breadcrumb>
         </div>
@@ -95,9 +103,9 @@ const Topbar = ({
         <div className="hidden md:flex items-center gap-5">
           <SearchInput
             value={searchValue}
-            onChange={onSearchChange || (() => {})}
+            onChange={handleSearchChange}
             placeholder={searchPlaceholder}
-            shortcut="⌘/"
+            shortcut={TOPBAR_DATA.search.shortcut}
             className="max-w-md w-[160px]"
           />
 
@@ -152,9 +160,9 @@ const Topbar = ({
               <div className="p-2">
                 <SearchInput
                   value={searchValue}
-                  onChange={onSearchChange || (() => {})}
+                  onChange={handleSearchChange}
                   placeholder={searchPlaceholder}
-                  shortcut="⌘/"
+                  shortcut={TOPBAR_DATA.search.shortcut}
                   className="w-full"
                 />
               </div>

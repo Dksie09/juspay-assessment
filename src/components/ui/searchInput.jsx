@@ -8,8 +8,10 @@ function SearchInput({
   onBlur,
   value,
   onChange,
-  placeholder = "Search",
-  shortcut = "⌘/",
+  placeholder = "",
+  bgcolor = "bg-input",
+  border = false,
+  shortcut = "",
   ...props
 }) {
   const [isFocused, setIsFocused] = React.useState(false);
@@ -44,7 +46,9 @@ function SearchInput({
   return (
     <div
       className={cn(
-        "flex items-center content-center gap-2 flex-wrap p-1 px-2 h-7 rounded-lg bg-input cursor-text relative",
+        "flex items-center content-center gap-2 flex-wrap p-1 px-2 h-7 rounded-lg cursor-text relative",
+        bgcolor,
+        border && "border border-input",
         className
       )}
       onClick={handleContainerClick}
@@ -63,13 +67,14 @@ function SearchInput({
           </div>
 
           {/* Right shortcut */}
-          <span className="text-foreground-muted-disabled text-sm">
-            {shortcut}
-          </span>
+          {shortcut && (
+            <span className="text-foreground-muted-disabled text-sm">
+              {shortcut}
+            </span>
+          )}
         </>
       )}
 
-      {/* Actual input - positioned absolutely when placeholder is shown */}
       <input
         ref={inputRef}
         type="text"

@@ -20,106 +20,7 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from "@/components/ui/collapsible";
-
-const FAVOURITES = [
-  { id: 1, name: "Overview" },
-  { id: 2, name: "Projects" },
-];
-
-const DASHBOARD_ITEMS = [
-  {
-    id: 1,
-    name: "Defɑult",
-    icon: "ChartPieSlice",
-    isActive: true,
-    isCollapsible: false,
-  },
-  {
-    id: 2,
-    name: "eCommerce",
-    icon: "eCommerce",
-    isActive: false,
-    isCollapsible: true,
-    subItems: [
-      { id: 21, name: "Option 1", href: "#" },
-      { id: 22, name: "Option 2", href: "#" },
-    ],
-  },
-  {
-    id: 3,
-    name: "Projects",
-    icon: "Projects",
-    isActive: false,
-    isCollapsible: true,
-    subItems: [
-      { id: 31, name: "Option 1", href: "#" },
-      { id: 32, name: "Option 2", href: "#" },
-    ],
-  },
-  {
-    id: 4,
-    name: "Online Courses",
-    icon: "OnlineCourses",
-    isActive: false,
-    isCollapsible: true,
-    subItems: [
-      { id: 41, name: "Option 1", href: "#" },
-      { id: 42, name: "Option 2", href: "#" },
-    ],
-  },
-];
-
-const PAGE_ITEMS = [
-  {
-    id: 1,
-    name: "User Profile",
-    icon: "UserProfile",
-    isDefaultOpen: true,
-    subItems: [
-      { id: 11, name: "Overview", href: "#" },
-      { id: 12, name: "Projects", href: "#" },
-      { id: 13, name: "Campaigns", href: "#" },
-      { id: 14, name: "Documents", href: "#" },
-      { id: 15, name: "Followers", href: "#" },
-    ],
-  },
-  {
-    id: 2,
-    name: "Account",
-    icon: "Account",
-    subItems: [
-      { id: 21, name: "Settings", href: "#" },
-      { id: 22, name: "Billing", href: "#" },
-    ],
-  },
-  {
-    id: 3,
-    name: "Corporate",
-    icon: "Corporate",
-    subItems: [
-      { id: 31, name: "Team", href: "#" },
-      { id: 32, name: "Departments", href: "#" },
-    ],
-  },
-  {
-    id: 4,
-    name: "Blog",
-    icon: "Blog",
-    subItems: [
-      { id: 41, name: "Posts", href: "#" },
-      { id: 42, name: "Categories", href: "#" },
-    ],
-  },
-  {
-    id: 5,
-    name: "Social",
-    icon: "Social",
-    subItems: [
-      { id: 51, name: "Feed", href: "#" },
-      { id: 52, name: "Messages", href: "#" },
-    ],
-  },
-];
+import { SIDEBAR_DATA } from "@/lib/constants";
 
 const FavouriteItem = ({ item }) => (
   <SidebarMenuItem key={item.id} className="px-2 py-1">
@@ -185,13 +86,13 @@ const PageItem = ({ item }) => (
 );
 
 export function AppSidebarLeft({
-  userAvatar = "/avatars/UserProfile.png",
-  userName = "ByeWind",
-  userFallback = "BW",
-  favourites = FAVOURITES,
-  dashboardItems = DASHBOARD_ITEMS,
-  pageItems = PAGE_ITEMS,
-  version = "v1.0.0",
+  userAvatar = SIDEBAR_DATA.user.avatar,
+  userName = SIDEBAR_DATA.user.name,
+  userFallback = SIDEBAR_DATA.user.fallback,
+  favourites = SIDEBAR_DATA.favourites,
+  dashboardItems = SIDEBAR_DATA.dashboardItems,
+  pageItems = SIDEBAR_DATA.pageItems,
+  version = SIDEBAR_DATA.user.version,
 }) {
   return (
     <Sidebar side="left" className="p-5">

@@ -9,11 +9,9 @@ import RadialSalesCard from "@/components/dashboard/RadialSalesCard";
 import { useLayout } from "@/hooks/use-layout";
 
 function Dashboard() {
-  const { isCompact, isVeryCompact, availableWidth } = useLayout();
+  const { isCompact, availableWidth } = useLayout();
 
-  // Determine layout based on available space rather than screen width
   const shouldStack = isCompact || availableWidth < 900;
-  const shouldStackStats = isVeryCompact || availableWidth < 640;
 
   return (
     <div className="py-4 flex flex-col gap-4 lg:gap-7">
