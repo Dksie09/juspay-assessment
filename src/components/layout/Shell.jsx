@@ -7,7 +7,10 @@ import Topbar from "@/components/layout/Topbar";
 import { LayoutProvider } from "@/hooks/use-layout";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { MobileLeftSidebar, MobileRightSidebar } from "@/components/layout/MobileSidebarContent";
+import {
+  MobileLeftSidebar,
+  MobileRightSidebar,
+} from "@/components/layout/MobileSidebarContent";
 import { useSearchShortcut } from "@/hooks/use-keyboard-shortcuts";
 import { LAYOUT_CONFIG } from "@/lib/constants";
 
@@ -24,7 +27,7 @@ function Shell({ children }) {
   const [rightSheetOpen, setRightSheetOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchInputRef = useRef(null);
-  
+
   // Enable keyboard shortcuts for search
   useSearchShortcut(searchInputRef);
 
@@ -63,7 +66,10 @@ function Shell({ children }) {
   }, []);
 
   return (
-    <LayoutProvider leftOpen={!isMobile && leftOpen} rightOpen={!isMobile && rightOpen}>
+    <LayoutProvider
+      leftOpen={!isMobile && leftOpen}
+      rightOpen={!isMobile && rightOpen}
+    >
       <div className="flex min-h-screen w-full">
         {/* Left Sidebar - Hidden on mobile */}
         {!isMobile && (

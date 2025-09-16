@@ -101,7 +101,7 @@ const Topbar = ({
 
       <div className="flex items-center gap-2 md:gap-5">
         {/* Desktop view - show search and all icons */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden min-[1141px]:flex items-center gap-5">
           <SearchInput
             ref={searchInputRef}
             value={searchValue}
@@ -125,7 +125,7 @@ const Topbar = ({
         </div>
 
         {/* Mobile view - show toggle sidebar and dropdown menu */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex max-[1140px]:flex items-center gap-2">
           {/* RIGHT sidebar toggle - uses handleIconClick (same as desktop) */}
           <IconButton
             iconName="SidePanel"
