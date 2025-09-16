@@ -93,8 +93,17 @@ npm run build
 - zod
 
 ### Design Thoughts
-Honeslty it's more about what feels right but a thoughts of mine:
-- Keep it simple on dashboards, animations/ delays may feel annoying
-- subtle scale down effect when pressing a button so it feels more alive
+Honeslty, it's more about what feels right but a few thoughts/ features:
+- Keep it simple on dashboards, delays in animations feels annoying/ slow
+- subtle scale down effect when pressing a button so it feels more "alive"
 - keyboard shortcut + navigation for accessibility
+  - Cmd/Ctrl + /: focus search
+  - Arrow Up/Down: move within focused region (sidebar or table)
+  - Enter/Space: activate table row
 - Tooltips: initial delay + skip-delay for fast hover switch
+- properly define all theme specific variables in globals.css
+- graph animation
+
+https://github.com/user-attachments/assets/e4f197f6-d791-436e-a08a-a9876cb92fa2
+
+Struggled with: The Donut chart with custom edges of arcs :)
