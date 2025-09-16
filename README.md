@@ -69,13 +69,13 @@ public/
 
 #### Setup
 
-```bash
-git clone https://github.com/Dksie09/juspay-assessment.git
-cd juspay-assessment
-npm install
-npm run dev
-# open http://localhost:3000
-```
+
+`git clone https://github.com/Dksie09/juspay-assessment.git`
+`cd juspay-dashboard`
+`npm install`
+`npm run dev`
+
+open http://localhost:3000
 
 #### Production build
 
@@ -83,13 +83,6 @@ npm run dev
 npm run build
 npm start
 ```
-
-### Scripts
-
-- `npm run dev`: Start dev server
-- `npm run build`: Build for production
-- `npm start`: Start production server
-- `npm run lint`: Run ESLint
 
 ### Tech Stack
 
@@ -100,6 +93,8 @@ npm start
 - next-themes
 - recharts
 - zod
+
+---
 
 ### Accessibility & UX
 
@@ -113,7 +108,7 @@ npm start
 
 ### Design Notes
 
-- Keep dashboard interactions snappy—avoid long delays on animations
+- Keep dashboard interactions snappy to avoid long delays on animations
 - Subtle press feedback (scale-down on buttons) to improve perceived responsiveness
 - Theme tokens defined in `globals.css` for consistent colors/spacing
 
