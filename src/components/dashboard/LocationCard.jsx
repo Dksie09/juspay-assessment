@@ -15,14 +15,13 @@ function LocationItem({ name, value, progress }) {
   );
 }
 
-// Reusable WorldMap component
 function WorldMap({ markers = [], className = "" }) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative max-w-[154px] mx-auto ${className}`}>
       <img
         src="/images/world-map.svg"
         alt="World map showing revenue locations"
-        className="w-[90%] h-[82px] object-cover"
+        className="w-full  h-[82px] object-cover"
       />
       {markers.map((marker, index) => (
         <Marker
@@ -58,7 +57,7 @@ function LocationCard({
   const displayMarkers = mapMarkers.length > 0 ? mapMarkers : defaultMarkers;
 
   return (
-    <Card className={`min-w-[202px] max-w-[202px] h-full ${className}`}>
+    <Card className={`min-w-[202px]  h-full ${className}`}>
       <CardHeading>{title}</CardHeading>
       <CardContent className="flex flex-col gap-4">
         <WorldMap markers={displayMarkers} />

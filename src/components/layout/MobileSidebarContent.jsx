@@ -135,7 +135,7 @@ export function MobileLeftSidebar({
   version = SIDEBAR_DATA.user.version,
 }) {
   return (
-    <div className="flex h-full flex-col gap-2 p-1">
+    <div className="flex h-full flex-col gap-2 px-4 py-5">
       {/* Header - exact replica with proper spacing */}
       <div className="flex flex-col gap-2 p-1">
         <div className="flex items-center gap-2">

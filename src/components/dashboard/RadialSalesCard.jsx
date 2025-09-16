@@ -11,7 +11,7 @@ const data = [
 
 function RadialSalesCard() {
   return (
-    <Card className="w-full min-w-[202px] max-w-[202px]">
+    <Card className="w-full min-w-[202px]">
       <CardHeading>Total Sales</CardHeading>
       <CardContent className="flex flex-col gap-4">
         <DonutChart data={data} />

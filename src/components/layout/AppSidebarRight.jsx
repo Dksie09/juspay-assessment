@@ -11,8 +11,8 @@ import { SIDEBAR_DATA } from "@/lib/constants";
 
 // Reusable components maintaining exact original styling
 const NotificationItem = ({ notification }) => (
-  <div className="p-1 flex gap-2">
-    <div className="bg-card-accent p-1 rounded-md h-6 w-6">
+  <div className="p-1 flex gap-2 items-center justify-center rounded-md cursor-pointer transition-colors duration-200 ease-out hover:bg-foreground-muted-disabled/30 group/notification">
+    <div className="bg-card-accent p-1 rounded-md h-6 w-6 transition-transform duration-200 ease-out group-hover/notification:scale-110">
       <img
         src={notification.icon}
         alt={notification.iconAlt}
@@ -27,11 +27,11 @@ const NotificationItem = ({ notification }) => (
 );
 
 const ActivityItem = ({ activity }) => (
-  <div className="p-1 flex gap-2">
+  <div className="p-1 flex gap-2 items-center rounded-md cursor-pointer transition-colors duration-200 ease-out hover:bg-foreground-muted-disabled/30 group/activity">
     <img
       src={activity.avatar}
       alt={`${activity.user} avatar`}
-      className="w-6 h-6"
+      className="w-6 h-6 transition-transform duration-200 ease-out group-hover/activity:-translate-y-0.5 group-hover/activity:scale-105 ml-1"
     />
     <div className="flex flex-col">
       <h5 className="text-foreground">{activity.title}</h5>

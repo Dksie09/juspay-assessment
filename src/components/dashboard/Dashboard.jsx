@@ -47,7 +47,7 @@ const Dashboard = React.memo(function Dashboard(props = {}) {
   }
 
   return (
-    <div className="py-4 flex flex-col gap-4 lg:gap-7">
+    <div className="pt-4 flex flex-col gap-4 lg:gap-7">
       {/* Top Row - Stats and Bar Chart */}
       <div
         className={`flex gap-4 lg:gap-7 ${

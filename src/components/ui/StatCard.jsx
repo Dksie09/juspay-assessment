@@ -20,7 +20,7 @@ const StatCard = ({
 
   return (
     <div
-      className={`flex  max-w-[400px] w-full p-6 flex-col items-start gap-2 flex-1 rounded-2xl shadow ${cardBg}
+      className={`flex  max-w-[700px] w-full p-6 flex-col items-start gap-2 flex-1 rounded-2xl shadow ${cardBg}
     transition-transform  duration-300 ease-in-out
     hover:shadow-lg hover:-translate-y-1
     will-change-transform motion-reduce:transition-none motion-reduce:transform-none ${className}`}

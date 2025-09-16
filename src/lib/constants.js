@@ -138,7 +138,7 @@ export const SIDEBAR_DATA = {
       id: 2,
       icon: "/icons/User.svg",
       iconAlt: "New user",
-      title: "New user registered",
+      title: "New order placed by Katey...",
       timestamp: "59 minutes ago",
     },
     {
