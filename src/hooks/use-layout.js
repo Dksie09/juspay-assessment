@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { LAYOUT_CONFIG } from "@/lib/constants";
 
 const LayoutContext = createContext();
 
@@ -19,8 +20,8 @@ export const LayoutProvider = ({ children, leftOpen, rightOpen }) => {
   }, []);
 
   useEffect(() => {
-    const LEFT_SIDEBAR_WIDTH = 212;
-    const RIGHT_SIDEBAR_WIDTH = 280;
+    const LEFT_SIDEBAR_WIDTH = LAYOUT_CONFIG.sidebar.left.widthNumeric;
+    const RIGHT_SIDEBAR_WIDTH = LAYOUT_CONFIG.sidebar.right.widthNumeric;
     
     let available = windowWidth;
     if (leftOpen) available -= LEFT_SIDEBAR_WIDTH;

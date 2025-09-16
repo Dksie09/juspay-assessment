@@ -1,6 +1,7 @@
 import { ThemeProvider } from "next-themes"
 import { Inter } from "next/font/google";
 import Shell from "@/components/layout/Shell";
+import ErrorBoundary from "@/components/ui/error-boundary";
 import "./globals.css";
 
 const inter = Inter({
@@ -25,7 +26,9 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <Shell>{children}</Shell>
+          <ErrorBoundary>
+            <Shell>{children}</Shell>
+          </ErrorBoundary>
         </ThemeProvider>
       </body>
     </html>

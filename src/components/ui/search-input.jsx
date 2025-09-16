@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import Icon from "@/components/ui/icon";
 
-function SearchInput({
+const SearchInput = React.forwardRef(function SearchInput({
   className,
   onFocus,
   onBlur,
@@ -13,10 +13,13 @@ function SearchInput({
   border = false,
   shortcut = "",
   ...props
-}) {
+}, ref) {
   const [isFocused, setIsFocused] = React.useState(false);
   const [hasValue, setHasValue] = React.useState(false);
   const inputRef = React.useRef(null);
+  
+  // Forward ref to allow parent components to focus this input
+  React.useImperativeHandle(ref, () => inputRef.current);
 
   React.useEffect(() => {
     setHasValue(value && value.length > 0);
@@ -90,6 +93,6 @@ function SearchInput({
       />
     </div>
   );
-}
+});
 
 export { SearchInput };

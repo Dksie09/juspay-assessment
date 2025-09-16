@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebarLeft } from "@/components/layout/AppSidebarLeft";
 import { AppSidebarRight } from "@/components/layout/AppSidebarRight";
@@ -8,9 +8,13 @@ import { LayoutProvider } from "@/hooks/use-layout";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MobileLeftSidebar, MobileRightSidebar } from "@/components/layout/MobileSidebarContent";
+import { useSearchShortcut } from "@/hooks/use-keyboard-shortcuts";
+import { LAYOUT_CONFIG } from "@/lib/constants";
 
-const LEFT_SIDEBAR_WIDTH = "212px";
-const RIGHT_SIDEBAR_WIDTH = "280px";
+const { LEFT_SIDEBAR_WIDTH, RIGHT_SIDEBAR_WIDTH } = {
+  LEFT_SIDEBAR_WIDTH: LAYOUT_CONFIG.sidebar.left.width,
+  RIGHT_SIDEBAR_WIDTH: LAYOUT_CONFIG.sidebar.right.width,
+};
 
 function Shell({ children }) {
   const isMobile = useIsMobile();
@@ -19,6 +23,10 @@ function Shell({ children }) {
   const [leftSheetOpen, setLeftSheetOpen] = useState(false);
   const [rightSheetOpen, setRightSheetOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const searchInputRef = useRef(null);
+  
+  // Enable keyboard shortcuts for search
+  useSearchShortcut(searchInputRef);
 
   // Auto-close mobile sheets when transitioning to desktop
   useEffect(() => {
@@ -50,9 +58,9 @@ function Shell({ children }) {
     }
   };
 
-  const handleSearchChange = (value) => {
+  const handleSearchChange = useCallback((value) => {
     setSearchValue(value);
-  };
+  }, []);
 
   return (
     <LayoutProvider leftOpen={!isMobile && leftOpen} rightOpen={!isMobile && rightOpen}>
@@ -92,6 +100,7 @@ function Shell({ children }) {
               isMobile={isMobile}
               searchValue={searchValue}
               onSearchChange={handleSearchChange}
+              searchInputRef={searchInputRef}
             />
           </div>
           <div className="flex-1 p-4">{children}</div>

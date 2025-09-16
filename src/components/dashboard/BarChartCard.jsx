@@ -2,7 +2,7 @@ import React from "react";
 import Card, { CardHeading, CardContent } from "../ui/card";
 import { ChartBarStacked } from "../ui/bar-chart";
 
-function BarChartCard() {
+const BarChartCard = React.memo(function BarChartCard() {
   return (
     <Card className="h-[252px] w-full">
       <CardHeading>Projections vs Actuals</CardHeading>
@@ -11,6 +11,8 @@ function BarChartCard() {
       </CardContent>
     </Card>
   );
-}
+});
 
 export default BarChartCard;
+
+BarChartCard.displayName = "BarChartCard";

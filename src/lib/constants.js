@@ -1,7 +1,13 @@
 // =============================================================================
-// DASHBOARD DATA CONSTANTS
+// DATA CONSTANTS
 // =============================================================================
 // Centralized data store for all hardcoded values across the application
+
+// =============================================================================
+// LAYOUT CONFIGURATION
+// =============================================================================
+
+
 
 // =============================================================================
 // SIDEBAR DATA
@@ -274,13 +280,28 @@ export const STATS_DATA = [
 
 export const LAYOUT_CONFIG = {
   // Sidebar dimensions
-  sidebars: {
+  sidebar: {
     left: {
       width: "212px",
+      widthNumeric: 212,
       widthNum: 212,
     },
     right: {
       width: "280px",
+      widthNumeric: 280,
+      widthNum: 280,
+    },
+  },
+
+  sidebars: {
+    left: {
+      width: "212px",
+      widthNumeric: 212,
+      widthNum: 212,
+    },
+    right: {
+      width: "280px",
+      widthNumeric: 280,
       widthNum: 280,
     },
   },

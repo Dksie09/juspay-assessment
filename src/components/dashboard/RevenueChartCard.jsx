@@ -16,7 +16,7 @@ const chartConfig = {
   },
 };
 
-function RevenueChartCard() {
+const RevenueChartCard = React.memo(function RevenueChartCard() {
   return (
     <Card className="h-[318px] w-full">
       <div className="flex flex-col lg:flex-row lg:gap-4 lg:items-center gap-2">
@@ -50,6 +50,8 @@ function RevenueChartCard() {
       </CardContent>
     </Card>
   );
-}
+});
 
 export default RevenueChartCard;
+
+RevenueChartCard.displayName = "RevenueChartCard";

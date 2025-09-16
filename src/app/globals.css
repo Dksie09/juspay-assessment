@@ -158,4 +158,24 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Keyboard navigation styles */
+  [data-keyboard-selected="true"] {
+    @apply bg-accent ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  
+  /* Focus styles for better keyboard accessibility */
+  .keyboard-focusable:focus-visible {
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background outline-none;
+  }
+  
+  /* Table row focus styles */
+  .table-row-focusable {
+    @apply focus:bg-accent focus:outline-none transition-colors;
+  }
+  
+  /* Search input focus enhancement */
+  .search-input-enhanced:focus-within {
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
 }

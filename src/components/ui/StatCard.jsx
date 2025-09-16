@@ -32,7 +32,13 @@ const StatCard = ({
             <span className="font-inter text-xs font-normal leading-5">
               {rate}
             </span>
-            {rateIcon && <Icon name={rateIcon} className="w-4 h-4" />}
+            {rateIcon && (
+              <Icon
+                name={rateIcon}
+                className="w-4 h-4"
+                switch={variant === "primary"}
+              />
+            )}
           </div>
         )}
       </div>

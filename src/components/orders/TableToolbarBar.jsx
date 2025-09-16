@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { SearchInput } from "@/components/ui/searchInput";
+import { SearchInput } from "@/components/ui/search-input";
 import IconButton from "@/components/ui/iconbutton";
 import StatusFilterDropdown from "./StatusFilterDropdown";
 import { ORDERS_DATA } from "@/lib/constants";

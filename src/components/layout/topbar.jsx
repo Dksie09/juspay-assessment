@@ -12,7 +12,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { SearchInput } from "@/components/ui/searchInput";
+import { SearchInput } from "@/components/ui/search-input";
 import IconButton from "@/components/ui/iconbutton";
 import {
   DropdownMenu,
@@ -32,6 +32,7 @@ const Topbar = ({
   onSearchChange,
   searchValue = "",
   isMobile = false,
+  searchInputRef,
 }) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -102,6 +103,7 @@ const Topbar = ({
         {/* Desktop view - show search and all icons */}
         <div className="hidden md:flex items-center gap-5">
           <SearchInput
+            ref={searchInputRef}
             value={searchValue}
             onChange={handleSearchChange}
             placeholder={searchPlaceholder}
@@ -159,6 +161,7 @@ const Topbar = ({
               <DropdownMenuSeparator />
               <div className="p-2">
                 <SearchInput
+                  ref={isMobile ? searchInputRef : undefined}
                   value={searchValue}
                   onChange={handleSearchChange}
                   placeholder={searchPlaceholder}
