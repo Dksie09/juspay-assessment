@@ -28,6 +28,7 @@ function TableToolbarBar({
           iconName="Plus"
           onClick={() => handleIconClick("Plus", onAddClick)}
           tooltip={ORDERS_DATA.toolbar.tooltips.add}
+          ariaLabel="Add new order"
         />
 
         {/* Filter dropdown integrated with icon button */}
@@ -41,6 +42,7 @@ function TableToolbarBar({
           iconName="Sort"
           onClick={() => handleIconClick("Sort", onSortClick)}
           tooltip={ORDERS_DATA.toolbar.tooltips.sort}
+          ariaLabel="Sort orders by ID"
         />
       </div>
 
@@ -52,6 +54,7 @@ function TableToolbarBar({
           placeholder={ORDERS_DATA.toolbar.searchPlaceholder}
           bgcolor="bg-background"
           border={true}
+          ariaLabel="Search orders"
         />
       </div>
     </div>

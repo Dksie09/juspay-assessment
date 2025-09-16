@@ -2,22 +2,26 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import Icon from "@/components/ui/icon";
 
-const SearchInput = React.forwardRef(function SearchInput({
-  className,
-  onFocus,
-  onBlur,
-  value,
-  onChange,
-  placeholder = "",
-  bgcolor = "bg-input",
-  border = false,
-  shortcut = "",
-  ...props
-}, ref) {
+const SearchInput = React.forwardRef(function SearchInput(
+  {
+    className,
+    onFocus,
+    onBlur,
+    value,
+    onChange,
+    placeholder = "",
+    bgcolor = "bg-input",
+    border = false,
+    shortcut = "",
+    ariaLabel,
+    ...props
+  },
+  ref
+) {
   const [isFocused, setIsFocused] = React.useState(false);
   const [hasValue, setHasValue] = React.useState(false);
   const inputRef = React.useRef(null);
-  
+
   // Forward ref to allow parent components to focus this input
   React.useImperativeHandle(ref, () => inputRef.current);
 
@@ -45,6 +49,7 @@ const SearchInput = React.forwardRef(function SearchInput({
   };
 
   const showPlaceholder = !isFocused && !hasValue;
+  const computedAriaLabel = ariaLabel || placeholder || "Search";
 
   return (
     <div
@@ -80,7 +85,9 @@ const SearchInput = React.forwardRef(function SearchInput({
 
       <input
         ref={inputRef}
-        type="text"
+        type="search"
+        role="searchbox"
+        aria-label={computedAriaLabel}
         value={value}
         onChange={handleChange}
         onFocus={handleFocus}

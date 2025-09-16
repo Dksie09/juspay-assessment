@@ -198,13 +198,14 @@ export const SIDEBAR_DATA = {
 
   // Right Sidebar - Contacts
   contacts: [
-    { id: 1, name: "Natali Craig", avatar: "/avatars/Natali Craig.png" },
-    { id: 2, name: "Drew Cano", avatar: "/avatars/Drew Cano.png" },
-    { id: 3, name: "Orlando Diggs", avatar: "/avatars/Orlando Diggs.png" },
-    { id: 4, name: "Andi Lane", avatar: "/avatars/Andi Lane.png" },
-    { id: 5, name: "Kate Morrison", avatar: "/avatars/Kate Morrison.png" },
-    { id: 6, name: "Koray Okumus", avatar: "/avatars/Koray Okumus.png" },
+    { id: 1, name: "Natali Craig", avatar: "/avatars/Natali Craig.png", lastSeen: "Online 2m ago" },
+    { id: 2, name: "Drew Cano", avatar: "/avatars/Drew Cano.png", lastSeen: "Last seen 10m ago" },
+    { id: 3, name: "Orlando Diggs", avatar: "/avatars/Orlando Diggs.png", lastSeen: "Last seen 1h ago" },
+    { id: 4, name: "Andi Lane", avatar: "/avatars/Andi Lane.png", lastSeen: "Online now" },
+    { id: 5, name: "Kate Morrison", avatar: "/avatars/Kate Morrison.png", lastSeen: "Last seen yesterday" },
+    { id: 6, name: "Koray Okumus", avatar: "/avatars/Koray Okumus.png", lastSeen: "Last seen 3 days ago" },
   ],
+  
 };
 
 // =============================================================================

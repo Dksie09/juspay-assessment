@@ -41,13 +41,18 @@ const ActivityItem = ({ activity }) => (
 );
 
 const ContactItem = ({ contact }) => (
-  <div className="p-1 flex gap-2">
+  <div className="p-1 flex gap-2 items-start group/contact cursor-pointer">
     <img
       src={contact.avatar}
       alt={`${contact.name} avatar`}
       className="w-6 h-6"
     />
-    <h5 className="text-foreground">{contact.name}</h5>
+    <div className="flex flex-col overflow-hidden justify-start">
+      <h5 className="text-foreground leading-4">{contact.name}</h5>
+      <p className="text-foreground-muted text-xs mt-0 max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out group-hover/contact:mt-0.5 group-hover/contact:max-h-5 group-hover/contact:opacity-100">
+        {contact.lastSeen}
+      </p>
+    </div>
   </div>
 );
 

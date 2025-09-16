@@ -52,15 +52,8 @@ const OrderTable = React.memo(function OrderTable(props) {
     OrderTableProps.parse(props);
   const [selectedRows, setSelectedRows] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const itemsPerPage = 10;
-
-  // Simulate loading for table data
-  React.useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, [searchValue, selectedStatus, sortOrder]);
 
   // Filter and search data
   const filteredData = useMemo(() => {
@@ -234,7 +227,7 @@ const OrderTable = React.memo(function OrderTable(props) {
   return (
     <div className="w-full">
       <div ref={tableContainerRef}>
-        <Table>
+        <Table aria-label="Orders table">
           <TableHeader>
             <TableRow>
               <TableHead className="w-12">
@@ -244,10 +237,22 @@ const OrderTable = React.memo(function OrderTable(props) {
                     if (el) el.indeterminate = isIndeterminate;
                   }}
                   onCheckedChange={handleSelectAll}
+                  aria-label={isAllSelected ? "Deselect all" : "Select all"}
                 />
               </TableHead>
               {ORDERS_DATA.tableConfig.columns.map((column) => (
-                <TableHead key={column.key}>{column.label}</TableHead>
+                <TableHead
+                  key={column.key}
+                  aria-sort={
+                    column.key === "ID" && sortOrder
+                      ? sortOrder === "asc"
+                        ? "ascending"
+                        : "descending"
+                      : undefined
+                  }
+                >
+                  {column.label}
+                </TableHead>
               ))}
               <TableHead className="w-12"></TableHead>
             </TableRow>
@@ -259,6 +264,7 @@ const OrderTable = React.memo(function OrderTable(props) {
                   key={order.ID}
                   data-row-index={index}
                   tabIndex={0}
+                  aria-selected={selectedRows.has(order.ID)}
                   className={`
                     ${selectedRows.has(order.ID) ? "bg-muted/50" : ""}
                     table-row-focusable
@@ -274,6 +280,11 @@ const OrderTable = React.memo(function OrderTable(props) {
                     <Checkbox
                       checked={selectedRows.has(order.ID)}
                       onCheckedChange={() => handleRowSelect(order.ID)}
+                      aria-label={
+                        selectedRows.has(order.ID)
+                          ? `Deselect order ${order.ID}`
+                          : `Select order ${order.ID}`
+                      }
                     />
                   </TableCell>
                   <TableCell className="font-medium">{order.ID}</TableCell>
@@ -307,7 +318,12 @@ const OrderTable = React.memo(function OrderTable(props) {
                     <Status status={order.Status} />
                   </TableCell>
                   <TableCell>
-                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 w-8 p-0"
+                      aria-label={`More actions for order ${order.ID}`}
+                    >
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </TableCell>
@@ -348,6 +364,7 @@ const OrderTable = React.memo(function OrderTable(props) {
                       onClick={() => goToPage(page)}
                       isActive={currentPage === page}
                       className="cursor-pointer"
+                      aria-label={`Go to page ${page}`}
                     >
                       {page}
                     </PaginationLink>

@@ -70,6 +70,7 @@ function TableHead({ className, ...props }) {
   return (
     <>
       <th
+        scope="col"
         data-slot="table-head"
         className={cn(
           "text-foreground-muted py-2 px-3 text-left align-middle text-xs font-normal leading-[18px] whitespace-nowrap",
