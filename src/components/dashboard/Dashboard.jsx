@@ -52,13 +52,13 @@ function Dashboard() {
       {/* Bottom Row - Sales Table and Radial Chart */}
       <div
         className={`flex gap-4 lg:gap-7 ${
-          shouldStack ? "flex-col" : "flex-row"
+          shouldStack ? "flex-col" : "flex-row md:h-[336px]"
         }`}
       >
-        <div className={`w-full min-h-[336px]`}>
+        <div className={`w-full h-full `}>
           <SalesTableCard />
         </div>
-        <div className={`${shouldStack ? "w-full" : "flex-1"} min-h-[336px]`}>
+        <div className={`${shouldStack ? "w-full" : "flex-1"}`}>
           <RadialSalesCard />
         </div>
       </div>

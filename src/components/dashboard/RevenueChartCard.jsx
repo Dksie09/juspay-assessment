@@ -19,9 +19,9 @@ const chartConfig = {
 function RevenueChartCard() {
   return (
     <Card className="h-[318px] w-full">
-      <div className="flex gap-4 items-center">
+      <div className="flex flex-col lg:flex-row lg:gap-4 lg:items-center gap-2">
         <CardHeading>Revenue</CardHeading>
-        <Separator orientation="vertical" />
+        <Separator orientation="vertical" className="hidden lg:block" />
         <div className="flex items-center gap-4 text-sm">
           <div className="flex items-center text-xs gap-[5px]">
             <div
@@ -29,7 +29,9 @@ function RevenueChartCard() {
               style={{ backgroundColor: chartConfig.current.color }}
             ></div>
             <span>{chartConfig.current.label}</span>
-            <span className="font-semibold">{chartConfig.current.revenue}</span>
+            <span className="font-semibold hidden lg:inline">
+              {chartConfig.current.revenue}
+            </span>
           </div>
           <div className="flex items-center text-xs gap-[5px]">
             <div
@@ -37,7 +39,9 @@ function RevenueChartCard() {
               style={{ backgroundColor: chartConfig.previous.color }}
             ></div>
             <span>{chartConfig.previous.label}</span>
-            <span className="font-semibold">{chartConfig.current.revenue}</span>
+            <span className="font-semibold hidden lg:inline">
+              {chartConfig.previous.revenue}
+            </span>
           </div>
         </div>
       </div>

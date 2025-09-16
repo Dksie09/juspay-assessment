@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Menu } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,6 +13,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { SearchInput } from "@/components/ui/searchInput";
 import IconButton from "@/components/ui/iconbutton";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const RIGHT_ICONS = [
   { name: "Theme", ariaLabel: "Toggle theme" },
@@ -28,6 +36,7 @@ const Topbar = ({
   searchPlaceholder = "Search...",
   onSearchChange,
   searchValue = "",
+  isMobile = false,
 }) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -42,53 +51,115 @@ const Topbar = ({
     }
   };
 
+  const handleMenuItemClick = (iconName) => {
+    handleIconClick(iconName);
+  };
+
   return (
-    <header className="flex px-7 py-5 justify-between items-center border-b">
+    <header className="flex px-4 md:px-7 py-5 justify-between items-center border-b">
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2">
+          {/* LEFT sidebar toggle - uses onToggleClick */}
           <IconButton
             iconName="SidePanel"
             onClick={onToggleClick}
-            ariaLabel="Toggle menu"
+            ariaLabel={isMobile ? "Open menu" : "Toggle sidebar"}
           />
-          <IconButton
-            iconName="Star"
-            onClick={onStarClick}
-            ariaLabel="Add to favorites"
-          />
+          {!isMobile && (
+            <IconButton
+              iconName="Star"
+              onClick={onStarClick}
+              ariaLabel="Add to favorites"
+            />
+          )}
         </div>
 
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="#">Dashboards</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Default</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        {/* Breadcrumb - always visible */}
+        <div className="ml-2">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#">Dashboards</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Default</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
       </div>
 
-      <div className="flex items-start gap-5">
-        <SearchInput
-          value={searchValue}
-          onChange={onSearchChange || (() => {})}
-          placeholder={searchPlaceholder}
-          shortcut="⌘/"
-          className="max-w-md w-[160px]"
-        />
+      <div className="flex items-center gap-2 md:gap-5">
+        {/* Desktop view - show search and all icons */}
+        <div className="hidden md:flex items-center gap-5">
+          <SearchInput
+            value={searchValue}
+            onChange={onSearchChange || (() => {})}
+            placeholder={searchPlaceholder}
+            shortcut="⌘/"
+            className="max-w-md w-[160px]"
+          />
 
-        <div className="flex items-center gap-2">
-          {rightIcons.map((icon) => (
-            <IconButton
-              key={icon.name}
-              iconName={icon.name}
-              onClick={() => handleIconClick(icon.name)}
-              ariaLabel={icon.ariaLabel}
-            />
-          ))}
+          <div className="flex items-center gap-2">
+            {/* RIGHT sidebar toggle and other icons - use handleIconClick */}
+            {rightIcons.map((icon) => (
+              <IconButton
+                key={icon.name}
+                iconName={icon.name}
+                onClick={() => handleIconClick(icon.name)}
+                ariaLabel={icon.ariaLabel}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile view - show toggle sidebar and dropdown menu */}
+        <div className="flex md:hidden items-center gap-2">
+          {/* RIGHT sidebar toggle - uses handleIconClick (same as desktop) */}
+          <IconButton
+            iconName="SidePanel"
+            onClick={() => handleIconClick("SidePanel")}
+            ariaLabel="Toggle sidebar"
+          />
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10"
+                aria-label="Open menu"
+              >
+                <Menu className="h-4 w-4" />
+              </button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent align="end" className="w-72">
+              {rightIcons
+                .filter((icon) => icon.name !== "SidePanel") // Don't duplicate the sidebar toggle
+                .map((icon) => (
+                  <DropdownMenuItem
+                    key={icon.name}
+                    onClick={() => handleMenuItemClick(icon.name)}
+                    className="flex items-center gap-2"
+                  >
+                    <IconButton iconName={icon.name} className="h-4 w-4" />
+                    <span>
+                      {icon.ariaLabel.replace(/^(Toggle|View|Add to) /, "")}
+                    </span>
+                  </DropdownMenuItem>
+                ))}
+              <DropdownMenuSeparator />
+              <div className="p-2">
+                <SearchInput
+                  value={searchValue}
+                  onChange={onSearchChange || (() => {})}
+                  placeholder={searchPlaceholder}
+                  shortcut="⌘/"
+                  className="w-full"
+                />
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>
