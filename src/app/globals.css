@@ -161,12 +161,12 @@ body {
   
   /* Keyboard navigation styles */
   [data-keyboard-selected="true"] {
-    @apply bg-accent ring-2 ring-ring ring-offset-2 ring-offset-background;
+    @apply bg-accent;
   }
   
   /* Focus styles for better keyboard accessibility */
   .keyboard-focusable:focus-visible {
-    @apply ring-2 ring-ring ring-offset-2 ring-offset-background outline-none;
+    @apply ring-1 ring-ring outline-none;
   }
   
   /* Table row focus styles */
@@ -176,6 +176,6 @@ body {
   
   /* Search input focus enhancement */
   .search-input-enhanced:focus-within {
-    @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
+    @apply ring-1 ring-ring;
   }
 }

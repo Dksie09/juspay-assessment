@@ -57,7 +57,7 @@ function TableRow({ className, ...props }) {
     <tr
       data-slot="table-row"
       className={cn(
-        "transition-colors",
+        "transition-colors duration-150 ease-out hover:bg-accent/60 focus:bg-accent keyboard-focusable",
         isBodyRow && "border-b border-input",
         className
       )}

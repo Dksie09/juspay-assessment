@@ -1,9 +1,13 @@
 import React from "react";
 
-function Card({ children, className = "" }) {
+function Card({ children, className = "", interactive = false }) {
   return (
     <div
-      className={`p-6 bg-card-primary flex flex-col gap-4 rounded-2xl ${className}`}
+      className={`p-6 bg-card-primary flex flex-col gap-4 rounded-2xl ${
+        interactive
+          ? "transition-all duration-150 ease-out hover:shadow-sm hover:-translate-y-0.5 will-change-transform motion-reduce:transition-none motion-reduce:transform-none"
+          : ""
+      } ${className}`}
     >
       {children}
     </div>

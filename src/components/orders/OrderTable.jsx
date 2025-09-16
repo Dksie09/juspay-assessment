@@ -30,14 +30,16 @@ import { useTableNavigation } from "@/hooks/use-keyboard-shortcuts";
 import LoadingSpinner from "@/components/ui/loading-spinner";
 
 const OrderTableProps = z.object({
-  data: z.array(z.object({
-    ID: z.string(),
-    Name: z.string(),
-    Project: z.string(),
-    Location: z.string(),
-    Date: z.string(),
-    Status: z.string(),
-  })),
+  data: z.array(
+    z.object({
+      ID: z.string(),
+      Name: z.string(),
+      Project: z.string(),
+      Location: z.string(),
+      Date: z.string(),
+      Status: z.string(),
+    })
+  ),
   searchValue: z.string(),
   selectedStatus: z.string(),
   sortOrder: z.enum(["asc", "desc"]).nullable(),
@@ -46,7 +48,8 @@ const OrderTableProps = z.object({
 
 const OrderTable = React.memo(function OrderTable(props) {
   // Validate props with Zod
-  const { data, searchValue, selectedStatus, sortOrder, onSortToggle } = OrderTableProps.parse(props);
+  const { data, searchValue, selectedStatus, sortOrder, onSortToggle } =
+    OrderTableProps.parse(props);
   const [selectedRows, setSelectedRows] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -258,8 +261,7 @@ const OrderTable = React.memo(function OrderTable(props) {
                   tabIndex={0}
                   className={`
                     ${selectedRows.has(order.ID) ? "bg-muted/50" : ""}
-                    focus:bg-accent focus:outline-none
-                    [&[data-keyboard-selected="true"]]:bg-accent [&[data-keyboard-selected="true"]]:ring-2 [&[data-keyboard-selected="true"]]:ring-ring
+                    table-row-focusable
                   `}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {

@@ -54,6 +54,14 @@ export function useTableNavigation({
 }) {
   const selectedRowRef = useRef(initialSelectedRow);
   const tableContainerRef = useRef(null);
+  const lastInteractionInsideRef = useRef(false);
+
+  const isActive = useCallback(() => {
+    const container = tableContainerRef.current;
+    if (!container) return false;
+    const hasFocusInside = container.contains(document.activeElement);
+    return hasFocusInside || lastInteractionInsideRef.current;
+  }, []);
 
   const scrollToRow = useCallback((rowIndex) => {
     if (!tableContainerRef.current) return;
@@ -65,6 +73,14 @@ export function useTableNavigation({
         block: 'nearest' 
       });
     }
+  }, []);
+
+  const clearKeyboardSelection = useCallback(() => {
+    if (!tableContainerRef.current) return;
+    const rows = tableContainerRef.current.querySelectorAll('[data-row-index]');
+    rows.forEach((row) => row.removeAttribute('data-keyboard-selected'));
+    selectedRowRef.current = -1;
+    lastInteractionInsideRef.current = false;
   }, []);
 
   const selectRow = useCallback((rowIndex) => {
@@ -86,20 +102,62 @@ export function useTableNavigation({
     });
   }, [rowCount, onRowSelect, scrollToRow]);
 
+  // Manage active area and clearing
+  useEffect(() => {
+    if (!enabled) return;
+
+    const container = tableContainerRef.current;
+
+    const handlePointerDown = (e) => {
+      const c = tableContainerRef.current;
+      if (!c) return;
+      const inside = c.contains(e.target);
+      lastInteractionInsideRef.current = inside;
+      if (!inside) {
+        clearKeyboardSelection();
+      }
+    };
+
+    const handleFocusIn = (e) => {
+      const c = tableContainerRef.current;
+      if (!c) return;
+      const inside = c.contains(e.target);
+      lastInteractionInsideRef.current = inside;
+      if (!inside) {
+        clearKeyboardSelection();
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown, true);
+    document.addEventListener('focusin', handleFocusIn);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown, true);
+      document.removeEventListener('focusin', handleFocusIn);
+    };
+  }, [enabled, clearKeyboardSelection]);
+
+  const guard = (fn) => (e) => {
+    if (!isActive()) return;
+    fn?.(e);
+  };
+
   const shortcuts = enabled ? {
-    ARROW_UP: () => {
+    ARROW_UP: guard(() => {
       const newIndex = Math.max(0, selectedRowRef.current - 1);
       selectRow(newIndex);
-    },
-    ARROW_DOWN: () => {
+    }),
+    ARROW_DOWN: guard(() => {
       const newIndex = Math.min(rowCount - 1, selectedRowRef.current + 1);
       selectRow(newIndex);
-    },
-    ENTER: () => {
+    }),
+    ENTER: guard(() => {
       if (selectedRowRef.current >= 0) {
         onRowActivate?.(selectedRowRef.current);
       }
-    }
+    }),
+    ESCAPE: guard(() => {
+      clearKeyboardSelection();
+    })
   } : {};
 
   useKeyboardShortcuts(shortcuts);
