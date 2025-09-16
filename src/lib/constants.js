@@ -231,7 +231,7 @@ export const TOPBAR_DATA = {
 
   // Search configuration
   search: {
-    placeholder: "Search...",
+    placeholder: "Search",
     shortcut: "⌘/",
   },
 };
@@ -777,7 +777,7 @@ export const ORDERS_DATA = {
 
   // Toolbar configuration
   toolbar: {
-    searchPlaceholder: "Search orders...",
+    searchPlaceholder: "Search",
     tooltips: {
       add: "Add new order",
       filter: "Filter by status",
